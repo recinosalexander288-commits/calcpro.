@@ -69,10 +69,11 @@ def render(settings) -> None:
     st.caption("Escriba con el teclado o use los botones. Enter evalúa y guarda en el historial. "
                "Ejemplos: `sqrt(2)*pi`, `sin(pi/6)`, `log(1000)`, `ln(e^3)`, `(2+3i)*(1-i)`, `5!`, `20%*80`.")
 
-    st.text_input("Expresión", key="expr", placeholder="Ej.: integrate no — aquí sólo expresiones: 2^10 + sqrt(144)",
+    st.text_input("Expresión", key="expr", placeholder="Ej.: 2^10 + sqrt(144)",
                   on_change=_commit, args=(settings,))
 
-    tabs = st.tabs(list(KEYPAD))
+    kp = st.container(key="keypad")
+    tabs = kp.tabs(list(KEYPAD))
     for tab, (name, rows) in zip(tabs, KEYPAD.items()):
         with tab:
             for r, row in enumerate(rows):
@@ -81,7 +82,7 @@ def render(settings) -> None:
                     with c:
                         W.btn(label, key=f"k_{name}_{r}_{label}", on_click=_insert, args=(token,))
 
-    a, b, c, d, e, f = st.columns(6)
+    a, b, c, d, e, f = kp.columns(6)
     with a:
         W.btn("⌫", key="bk", on_click=_back, help="Borrar último carácter")
     with b:

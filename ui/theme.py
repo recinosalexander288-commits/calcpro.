@@ -19,6 +19,15 @@ _BASE = """
   .block-container { padding: 1rem .6rem 4rem .6rem !important; }
   .stButton button { padding: .35rem .2rem; font-size: .95rem; }
 }
+/* Teclado: mantener las filas de botones en horizontal también en el celular */
+@media (max-width: 640px) {
+  .st-key-keypad div[data-testid="stHorizontalBlock"] { flex-wrap: nowrap !important; gap: .25rem !important; }
+  .st-key-keypad div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"],
+  .st-key-keypad div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
+      min-width: 0 !important; width: auto !important; flex: 1 1 0 !important; }
+  .st-key-keypad .stButton button { padding: .3rem 0 !important; font-size: .78rem !important;
+      min-height: 2.4rem; white-space: nowrap; overflow: hidden; }
+}
 </style>
 """
 
